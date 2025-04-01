@@ -1,4 +1,3 @@
-numpy==1.23.5  # important to avoid np.bool issue
 streamlit
 semantic-kernel
 openai
