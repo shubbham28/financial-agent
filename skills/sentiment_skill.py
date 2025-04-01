@@ -1,8 +1,17 @@
 import requests
 from bs4 import BeautifulSoup
-from transformers import pipeline
+import torch
+from transformers import BertTokenizer, BertForSequenceClassification
+import numpy as np
 
-sentiment_pipeline = pipeline("sentiment-analysis", model="ProsusAI/finbert")
+# Load FinBERT tokenizer and model manually
+model_name = "ProsusAI/finbert"
+tokenizer = BertTokenizer.from_pretrained(model_name)
+model = BertForSequenceClassification.from_pretrained(model_name)
+model.eval()
+
+# Label order used by FinBERT
+labels = ['negative', 'neutral', 'positive']
 
 async def get_sentiment(ticker: str) -> str:
     url = f"https://finviz.com/quote.ashx?t={ticker}"
@@ -19,12 +28,15 @@ async def get_sentiment(ticker: str) -> str:
     if not headlines:
         return f"No headlines found for {ticker}."
 
-    sentiments = sentiment_pipeline(headlines)
-
     summary = []
-    for hl, sent in zip(headlines, sentiments):
-        summary.append(f"- {hl} → {sent['label']} ({sent['score']:.2f})")
+    for hl in headlines:
+        inputs = tokenizer(hl, return_tensors="pt", truncation=True, padding=True)
+        with torch.no_grad():
+            outputs = model(**inputs)
+            probs = torch.nn.functional.softmax(outputs.logits, dim=1).numpy()[0]
+            label_index = np.argmax(probs)
+            label = labels[label_index]
+            score = probs[label_index]
+        summary.append(f"- {hl} → {label.title()} ({score:.2f})")
 
     return f"News Sentiment for {ticker} (last 20 headlines):\n" + "\n".join(summary)
-
-

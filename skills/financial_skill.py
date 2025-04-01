@@ -35,4 +35,4 @@ async def analyze_stock(ticker: str, period: str = "1mo", interval: str = "1d") 
     plt.savefig(path)
     plt.close()
 
-    return f"{ticker.upper()} Analysis:\nPrice: {latest['Close']:.2f}\nMA(5): {ma:.2f}\nEMA(10): {latest['EMA_10']:.2f}\nVolatility: {vol:.4f}\nRSI: {latest['RSI']:.2f}\nMACD: {latest['MACD']:.2f}\nSignal: {latest['Signal']:.2f}\nTrend: {trend}\nPlot saved at {path}"
+    return f"{ticker.upper()} Analysis:\n\nPrice: {latest['Close']:.2f}\n\nMA(5): {ma:.2f}\n\nEMA(10): {latest['EMA_10']:.2f}\n\nVolatility: {vol:.4f}\n\nRSI: {latest['RSI']:.2f}\n\nMACD: {latest['MACD']:.2f}\n\nSignal: {latest['Signal']:.2f}\n\nTrend: {trend}"

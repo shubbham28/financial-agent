@@ -1,0 +1,4 @@
+summary_prompt: |
+  Summarize the following financial analysis and sentiment information:
+  {{$input}}
+    Return the main insights, trends, and a forward-looking statement. Ignore the article title and focus on sentiment
