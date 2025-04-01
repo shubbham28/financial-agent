@@ -105,7 +105,8 @@ if user_input:
                 "time": get_timestamp()
             })
         else:
-            tickers = [s.strip().upper() for s in user_input.split(",") if s.strip()]
+            tickers = re.split(r'[,\s]+', user_input.strip())
+            tickers = [token for token in tickers if token]
             for ticker in tickers:
                 try:
                     df = yf.Ticker(ticker).history(period="1d")
