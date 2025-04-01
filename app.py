@@ -107,22 +107,26 @@ if user_input:
         else:
             tickers = [s.strip().upper() for s in user_input.split(",") if s.strip()]
             for ticker in tickers:
-                analysis = loop.run_until_complete(financial_skill.analyze_stock(ticker))
-                sentiment = loop.run_until_complete(sentiment_skill.get_sentiment(ticker))
-                text_input = f"\n{analysis}\n\nList of articles and followed by their sentiment and confidence\n\n{sentiment}\n"
-                summary = loop.run_until_complete(summary_skill.summarize(text_input))
+                try:
+                    df = yf.Ticker(ticker).history(period="1d")
+                    if not df.empty:
+                        analysis = loop.run_until_complete(financial_skill.analyze_stock(ticker))
+                        sentiment = loop.run_until_complete(sentiment_skill.get_sentiment(ticker))
+                        text_input = f"\n{analysis}\n\nList of articles and followed by their sentiment and confidence\n\n{sentiment}\n"
+                        summary = loop.run_until_complete(summary_skill.summarize(text_input))
 
-                now = get_timestamp()
-                st.session_state.history.append({
-                    "role": "agent",
-                    "type": "combo",
-                    "summary": f"🧠 **{ticker} Analysis Summary**\n\n{summary}",
-                    "analysis": f"📊 **Analysis**\n\n{analysis}",
-                    "sentiment": f"📰 **Sentiment**\n\n{sentiment}",
-                    "image": f"outputs/{ticker}_plot.png",
-                    "time": now
-                })
-
+                        now = get_timestamp()
+                        st.session_state.history.append({
+                            "role": "agent",
+                            "type": "combo",
+                            "summary": f"🧠 **{ticker} Analysis Summary**\n\n{summary}",
+                            "analysis": f"📊 **Analysis**\n\n{analysis}",
+                            "sentiment": f"📰 **Sentiment**\n\n{sentiment}",
+                            "image": f"outputs/{ticker}_plot.png",
+                            "time": now
+                        })
+                except Exception:
+                    continue
 
 # 🔁 Replay full conversation from state (including latest input)
 for msg in st.session_state.history:
