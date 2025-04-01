@@ -20,16 +20,19 @@ A modular AI agent that performs real-time financial data analysis, sentiment ex
 
 ## 🔧 Installation
 
+```bash
 git clone https://github.com/YOUR_USERNAME/financial-agent.git
 cd financial-agent
 pip install -r requirements.txt
+```
 
 ---
 
 ## ▶️ Running the App
 
+```bash
 streamlit run app.py
-
+```
 The app launches in your browser with a chat-style interface. Ask things like:
 - `TSLA`
 - `AAPL for last 7 days at 1hr interval`
@@ -39,11 +42,13 @@ The app launches in your browser with a chat-style interface. Ask things like:
 
 ## 🔐 Configuration
 Update `config/model_config.yaml` with your OpenAI and Hugging Face keys:
+```yaml
 openai:
   api_key: "your-openai-key"
 huggingface:
   api_key: "your-huggingface-key"
   model: "meta-llama/Llama-2-7b-chat-hf"
+```
 
 Use `.env` or Hugging Face Secrets for production deployment.
 
