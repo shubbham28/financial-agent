@@ -21,7 +21,7 @@ A modular AI agent that performs real-time financial data analysis, sentiment ex
 ## 🔧 Installation
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/financial-agent.git
+git clone https://github.com/shubbham28/financial-agent.git
 cd financial-agent
 pip install -r requirements.txt
 ```
