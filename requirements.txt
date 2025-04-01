@@ -1,0 +1,12 @@
+streamlit
+semantic-kernel
+openai
+yfinance
+pandas
+pyyaml
+transformers
+torch
+matplotlib
+beautifulsoup4
+requests
+numpy==1.23.5  # important to avoid np.bool issue
