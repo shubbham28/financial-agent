@@ -1,4 +1,4 @@
-# 🧠 Financial Analysis Agent with LLMs & Semantic Kernel
+# 🧠 Financial Analysis Agent with LLMs
 
 A modular AI agent that performs real-time financial data analysis, sentiment extraction, and generates smart summaries using:
 - 📈 Yahoo Finance data
