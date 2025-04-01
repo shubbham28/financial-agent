@@ -1,7 +1,7 @@
 openai:
   model: "gpt-3.5-turbo"
-  api_key: "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"
+  api_key: "hf_variable"
   
 huggingface:
   model: "meta-llama/Llama-2-7b-chat-hf"
-  api_key: "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"
+  api_key: "hf_variable"

@@ -26,3 +26,5 @@ async def get_sentiment(ticker: str) -> str:
         summary.append(f"- {hl} → {sent['label']} ({sent['score']:.2f})")
 
     return f"News Sentiment for {ticker} (last 20 headlines):\n" + "\n".join(summary)
+
+
