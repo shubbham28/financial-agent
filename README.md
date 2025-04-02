@@ -55,13 +55,18 @@ Use `.env` or Hugging Face Secrets for production deployment.
 ## 📁 Project Structure
 ```
 financial_agent/
-├── app.py                 # Streamlit interface
-├── config/                # API keys, prompt templates
-├── skills/                # Modular skills (finance, sentiment, summary)
-├── requirements.txt       # Dependencies
-└── README.md              # You are here
+├── app.py                     # Main Streamlit chatbot UI
+├── agent_kernel.py            # Loads Semantic Kernel and adds skills
+├── config/
+│   ├── model_config.yaml      # API keys and model info
+│   ├── prompt_templates.yaml  # Templates for LLM instructions
+├── skills/
+│   ├── financial_skill.py     # Gets EMA, RSI, MACD, etc. via yfinance
+│   ├── sentiment_skill.py     # Scrapes Finviz and runs FinBERT manually
+│   ├── summary_skill.py       # Builds LLM prompt and summarizes with OpenAI
+├── requirements.txt           # Python dependencies
+└── README.md                  # You're here
 ```
-
 ---
 
 ## 📦 Deployment
